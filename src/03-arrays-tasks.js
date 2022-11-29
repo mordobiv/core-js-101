@@ -35,16 +35,12 @@ function findElement(arr, value) {
  *    2 => [ 1, 3 ]
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
-  // const arr = new Array(len);
-  // arr.map((el, ind) => {
-  //   console.log(1);
-  //   console.log(el, ind);
-  //   return ind * 2 + 1;
-  // });
-  // console.log(arr);
-  // return arr;
+// function generateOdds(/* len */) {
+function generateOdds(len) {
+  const arr = new Array(len);
+  arr.fill(0);
+  const newArr = arr.map((el, ind) => ind * 2 + 1);
+  return newArr;
 }
 
 
@@ -241,8 +237,13 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  let i = 0;
+  const newArr = arr.map(() => {
+    const tmpArr = arr.slice(0, i += 1);
+    return tmpArr.reduce((total, value) => total + value);
+  });
+  return newArr;
 }
 
 /**
@@ -256,8 +257,13 @@ function getMovingSum(/* arr */) {
  * [ 'a', 'b', 'c' , null ]  => [ "b", null ]
  * [ "a" ] => []
  */
-function getSecondItems(/* arr */) {
-  throw new Error('Not implemented');
+function getSecondItems(arr) {
+  // eslint-disable-next-line array-callback-return, consistent-return
+  return arr.filter((el, ind) => {
+    if (ind % 2 === 1) {
+      return [el];
+    }
+  });
 }
 
 
@@ -274,9 +280,16 @@ function getSecondItems(/* arr */) {
  *  [ 'a', 'b' ] => [ 'a', 'b','b' ]
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
- */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+*/
+function propagateItemsByPositionIndex(arr) {
+  let newArr = [];
+  arr.map((el, ind) => {
+    const tmpArr = new Array(ind + 1);
+    tmpArr.fill(el);
+    newArr = newArr.concat(tmpArr);
+    return 0;
+  });
+  return newArr;
 }
 
 
@@ -293,8 +306,16 @@ function propagateItemsByPositionIndex(/* arr */) {
  *   [ 1,2,3,4,5,6,7,8,9,10 ] => [ 10, 9, 8 ]
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
-function get3TopItems(/* arr */) {
-  throw new Error('Not implemented');
+function get3TopItems(arr) {
+  const resArr = [];
+  function getMaxItem() {
+    const maxValue = Math.max(...arr);
+    if (maxValue !== -Infinity) resArr.push(arr.pop(Math.max(...arr)));
+  }
+  getMaxItem();
+  getMaxItem();
+  getMaxItem();
+  return resArr;
 }
 
 
@@ -312,16 +333,8 @@ function get3TopItems(/* arr */) {
  *   [ 1, '2' ] => 1
  */
 
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
-  // if (!arr.length) return 0;
-  // return arr.reduce((total, value) => {
-  //   if (value > 0) {
-  //     // eslint-disable-next-line no-param-reassign
-  //     total += 1;
-  //   }
-  //   return total;
-  // }, 0);
+function getPositivesCount(arr) {
+  return arr.filter((el) => el > 0 && typeof el === 'number').length;
 }
 
 /**
@@ -369,8 +382,8 @@ function getItemsSum(arr) {
  *  [ -1, 'false', null, 0 ] => 2
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  return arr.length - arr.filter((el) => el).length;
 }
 
 /**

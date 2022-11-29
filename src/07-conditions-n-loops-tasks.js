@@ -178,8 +178,16 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  for (let i = 0; i < str.length; i += 1) {
+    const patternToMatch = new RegExp(str[i], 'g');
+    if (str.match(patternToMatch).length > 1) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+    return str[i];
+  }
+  return null;
 }
 
 
@@ -304,8 +312,12 @@ function isCreditCardNumber(ccn) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let numArr = num.toString().split('');
+  while (numArr.length > 1) {
+    numArr = numArr.reduce((total, value) => +total + +value).toString().split('');
+  }
+  return numArr[0];
 }
 
 
@@ -355,8 +367,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -372,8 +384,19 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let fullPath = '';
+  for (let i = 0; i < pathes[0].length; i += 1) {
+    const currentPath = pathes[0].split('/')[i];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const path of pathes) {
+      if (path.split('/')[i] !== currentPath) {
+        return fullPath;
+      }
+    }
+    fullPath += currentPath === '' ? '/' : `${currentPath}/`;
+  }
+  return fullPath;
 }
 
 
