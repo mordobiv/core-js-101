@@ -104,8 +104,18 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  let counter = 0;
+  return () => {
+    while (counter < attempts) {
+      try {
+        return func();
+      } catch (_e) {
+        counter += 1;
+      }
+    }
+    return false;
+  };
 }
 
 
@@ -172,8 +182,11 @@ function partialUsingArguments(fn, ...args1) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  let counter = 0;
+
+  // eslint-disable-next-line no-plusplus
+  return () => startFrom + counter++;
 }
 
 
