@@ -159,11 +159,10 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-// function isInsideCircle(circle, point) {
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
-  // return (circle.center.x + circle.radius / 2) - point.x > 0
-  // && (circle.center.y + circle.radius / 2) - point.y > 0;
+function isInsideCircle(circle, point) {
+  const dotHypotenuse = Math.sqrt((point.x - circle.center.x) ** 2
+    + (point.y - circle.center.y) ** 2);
+  return dotHypotenuse < circle.radius;
 }
 
 
@@ -342,6 +341,7 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
+// function isBracketsBalanced(/* str */) {
 function isBracketsBalanced(/* str */) {
   throw new Error('Not implemented');
 }

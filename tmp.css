@@ -1,0 +1,17 @@
+html {
+  font-size: 20px;
+}
+
+.wrapper {
+  background-color: black;
+  color: white;
+  padding: 2%;
+}
+
+.item {
+  width: 100%;
+}
+
+.active {
+  background-color: antiquewhite;
+}

@@ -1,5 +1,8 @@
-function getFalsyValuesCount(arr) {
-  return arr.length - arr.filter((el) => el).length;
+const arr = ['one', 'nine'];
+
+function toCsvText(arr1) {
+  console.log(arr1.sort());
+  // return arr1.join();
 }
 
-console.log(getFalsyValuesCount([null, undefined, false, 0, '', 3]));
+toCsvText(arr);
